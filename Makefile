@@ -39,13 +39,13 @@ copy:
 
 push:
 	clear
-	git diff indiacovid19.json
+	git diff usacovid19.json
 	@echo
 	@echo Press enter to commit
 	@read
 	clear
-	git add indiacovid19.json
-	date=$$(git diff --cached indiacovid19.json | \
+	git add usacovid19.json
+	date=$$(git diff --cached usacovid19.json | \
 	        cut -d '"' -f4 | grep "[0-9]\{4\}" | tail -n 1); \
 	git commit -m "Add case numbers from MoHFW for $$date"
 	git log -n 1
@@ -72,8 +72,8 @@ scan:
 	done
 
 venv:
-	python3 -m venv ~/.venv/indiacovid19
-	echo . ~/.venv/indiacovid19/bin/activate > venv
+	python3 -m venv ~/.venv/usacovid19
+	echo . ~/.venv/usacovid19/bin/activate > venv
 	. ./venv && pip3 install matplotlib==3.2.1
 
 favicon:
@@ -85,9 +85,9 @@ favicon:
 
 TMP_REV = /tmp/rev.txt
 CAT_REV = cat $(TMP_REV)
-GIT_SRC = https://github.com/indiacovid19/indiacovid19
-GIT_DST = https://github.com/indiacovid19/indiacovid19.github.io
-WEB_URL = https://indiacovid19.github.io/
+GIT_SRC = https://github.com/usacovid19/usacovid19
+GIT_DST = https://github.com/usacovid19/usacovid19.github.io
+WEB_URL = https://usacovid19.github.io/
 TMP_GIT = /tmp/tmpgit
 README  = $(TMP_GIT)/README.md
 
@@ -100,10 +100,10 @@ publish: site
 	rm -rf $(TMP_GIT)
 	cp -R _site $(TMP_GIT)
 	git rev-parse --short HEAD > $(TMP_REV) || echo 0000000 > $(TMP_REV)
-	echo indiacovid19.github.io >> $(README)
+	echo usacovid19.github.io >> $(README)
 	echo ====================== >> $(README)
 	echo >> $(README)
-	echo Generated from [indiacovid19/indiacovid19][GIT_SRC] >> $(README)
+	echo Generated from [usacovid19/usacovid19][GIT_SRC] >> $(README)
 	echo "([$$($(CAT_REV))][GIT_REV])". >> $(README)
 	echo >> $(README)
 	echo Visit $(WEB_URL) to view the the website. >> $(README)
